@@ -1,0 +1,40 @@
+{% extends "registration/base.html" %}
+{% load staticfiles %}
+
+{% block head %}
+	<title>Login</title>
+{% endblock head %}
+
+{% block content %}
+	<div>
+		{% if form.errors %}
+			<div class="alert">Please try again</div>
+		{% endif %}
+	
+
+		<section>
+			<form action="." method="post">{% csrf_token %}
+				<fieldset>
+					<legend>Login</legend>
+					<p>
+						<label for="id_username">Username: </label>
+						{{ form.username }}
+					</p>
+					<p>
+						<label for="id_password">Password: </label>
+						{{ form.password }}
+					</p>
+					{% if next %}
+	          			<input type="hidden" name="next" value="{{ next }}" />
+	        		{% else %}
+	          			<input type="hidden" name="next" value="/" />
+	        		{% endif %}
+	        			<input type="submit" value="Login" class='button expand radius'/>
+				</fieldset>
+			</form>
+		</section>
+	
+	</div>
+	
+
+{% endblock content %}

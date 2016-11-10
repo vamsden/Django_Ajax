@@ -1,0 +1,44 @@
+{% extends "app/base.html" %}
+{% load staticfiles %}
+
+{% block head %}
+	<title>Form App</title>
+{% endblock head %}
+
+
+{% block content %}
+	<br>
+	<div>
+		<div>
+			<a href="/logout">Logout</a>
+			<h2>Hi, {{ request.user.username }}</h2>
+		</div>
+	</div>
+
+	<div>
+		<div>
+			<form action="/post/" method="post" id="post-form">
+				{% csrf_token %}
+				<div id="the_post">
+					{{ form.text }}
+				</div>
+				<div id="results"></div>
+				<input type="submit" value="Post">
+			</form>
+		</div>
+	</div>
+
+	<div>
+		<div>
+			<ul id="talk">
+				{% for post in all_posts %}
+					<li>
+						<strong>{{ post.text }}</strong>
+						<em>{{ post.author }}</em>
+						<span>{{ post.created }}</span>
+					</li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+{% endblock content %}
